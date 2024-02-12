@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "description": "my first backend in nodejs and typescript",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": ""
   },
   "author": "SamarendraBehera",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.2",
+    "express": "^4.18.2",
+    "mongoose": "^8.1.2"
+  }
 }

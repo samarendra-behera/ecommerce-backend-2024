@@ -18,3 +18,15 @@ To install TypeScript globally, follow these steps:
    
    ```bash
    npm install -g typescript@5.3.3
+
+
+## Installation
+
+To install all npm packages listed in the `package.json` file, follow these steps:
+
+1. **Open a terminal or command prompt.**
+
+2. **Navigate to your project directory.**
+
+   ```bash
+   npm i
