@@ -5,7 +5,7 @@ import {connectDB} from "./utils/featuers.js"
 import userRoutes from './routes/user.js'
 import { errorMiddleware } from "./middlewares/error.js";
 
-const port = 5000
+const port = 4500
 const host = '127.0.0.1'
 
 connectDB()

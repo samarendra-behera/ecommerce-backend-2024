@@ -13,6 +13,7 @@
   "author": "SamarendraBehera",
   "license": "ISC",
   "dependencies": {
+    "@types/webpack": "^5.28.5",
     "dotenv": "^16.4.2",
     "express": "^4.18.2",
     "mongoose": "^8.1.2",
