@@ -5,6 +5,7 @@ import {
     getUser,
     deleteUser
 } from '../controllers/user.js'
+import { adminOnly } from '../middlewares/auth.js'
 
 const app = express.Router()
 
@@ -12,9 +13,9 @@ const app = express.Router()
 app.post('/new', newUser)
 
 // Routes - /api/v1/user/all
-app.get('/all', getAllUsers)
+app.get('/all', adminOnly, getAllUsers)
 
 // Routes - /api/v1/user/dynamicId
-app.route('/:id').get(getUser).delete(deleteUser)
+app.route('/:id').get(getUser).delete(adminOnly, deleteUser)
 
 export default app

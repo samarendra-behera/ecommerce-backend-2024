@@ -15,3 +15,10 @@ export interface newUserReqBody {
     role: string;
     dob: Date;
 }
+
+export interface newProductReqBody {
+    name: string;
+    price: number;
+    category: string;
+    stock: number;
+}
