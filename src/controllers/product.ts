@@ -28,3 +28,81 @@ export const newProduct = TryCatch(async(req:Request<{},{},newProductReqBody>, r
         product
     })
 })
+
+export const getlatestProducts = TryCatch(async (req, res, next)=>{
+    const products = await Product.find({}).sort({createAt: -1}).limit(5);
+    return res.status(200).json({
+        success: true,
+        products
+    })
+})
+
+export const getProductCategories = TryCatch(async (req, res, next)=>{
+    const categories = await Product.distinct("category");
+    return res.status(200).json({
+        success: true,
+        categories
+    })
+})
+
+export const getAdminProducts = TryCatch(async (req, res, next)=>{
+    const products = await Product.find({})
+    return res.status(200).json({
+        success: true,
+        products
+    })
+})
+
+export const getProductDetails = TryCatch(async (req, res, next)=>{
+    const {id} = req.params
+    const product = await Product.findById(id);
+    if(!product) return next(new ErrorHandler("Product Not Found!", 404))
+    return res.status(200).json({
+        success: true,
+        product
+    })
+})
+
+export const updateProduct = TryCatch(async (req, res, next)=>{
+    const {id} = req.params
+    const photo = req.file
+    const {name, category, price, stock, } = req.body
+    const product = await Product.findById(id);
+    if(!product) return next(new ErrorHandler("Invalid Product Id", 400))
+
+    if(photo){
+        rm(product.photo!, ()=>{
+            console.log("Old Photo Deleted")
+        });
+        product.photo = photo.path;
+    }
+    if(name) product.name = name;
+    if(stock) product.stock = stock;
+    if(price) product.price = price;
+    if(category) product.category = category;
+
+    await product.save()
+
+    return res.status(200).json({
+        success: true,
+        message: "Product Updated Successfully"
+    })
+
+}) 
+
+export const deleteProduct = TryCatch(async(req, res, next)=>{
+    const {id} = req.params
+    
+    const product = await Product.findById(id)
+    if(!product) return next(new ErrorHandler("Invalid Product Id", 400))
+
+    rm(product.photo!, ()=>{
+        console.log("Photo Deleted")
+    })
+    await product.deleteOne()
+
+    return res.status(200).json({
+        success: true,
+        message: "Product Deleted Successfully"
+    })
+})
