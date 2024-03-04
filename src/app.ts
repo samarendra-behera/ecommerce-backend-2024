@@ -1,24 +1,29 @@
 import express from "express";
 import NodeCache from "node-cache";
+import {config} from "dotenv"
+import morgan from "morgan"
 import {connectDB} from "./utils/featuers.js"
 import { errorMiddleware } from "./middlewares/error.js";
 
 // Importing Routes
 import userRoutes from './routes/user.js'
 import productRoutes from './routes/product.js'
-import { NoEmitOnErrorsPlugin } from "webpack";
+import orderRoutes from './routes/order.js'
 
-
-const port = 4500
-const host = '127.0.0.1'
-
-connectDB()
+config({
+    path: "./.env",
+})
+const port = process.env.PORT || 45000
+const host = process.env.HOST || '127.0.0.1'
+const mongoUrl = process.env.MONGO_URL || ""
+connectDB(mongoUrl)
 
 export const myCache = new NodeCache()
 
 const app = express()
 
 app.use(express.json())
+app.use(morgan("dev"))
 
 app.get('/', (req, res)=>{
     res.send("API Working with /api/v1")
@@ -27,6 +32,7 @@ app.get('/', (req, res)=>{
 // Using Routes
 app.use("/api/v1/user", userRoutes)
 app.use("/api/v1/product", productRoutes)
+app.use("/api/v1/order", orderRoutes)
 
 app.use("/uploads", express.static("uploads"))
 app.use(errorMiddleware)
