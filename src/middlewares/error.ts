@@ -15,6 +15,10 @@ export const errorMiddleware = (
         err.message = "Invalid ID"
         err.statusCode = 400
     }
+    if (err.name == "ValidationError") {
+        err.message = "Invalid Data Type"
+        err.statusCode = 400
+    }
     return res.status(err.statusCode).json({
         success: false,
         message: err.message

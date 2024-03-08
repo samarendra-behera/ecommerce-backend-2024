@@ -133,7 +133,7 @@ export const updateProduct = TryCatch(async (req, res, next)=>{
     const photo = req.file
     const {name, category, price, stock, } = req.body
     const product = await Product.findById(id);
-    if(!product) return next(new ErrorHandler("Invalid Product Id", 400))
+    if(!product) return next(new ErrorHandler("Product not Found", 400))
 
     if(photo){
         rm(product.photo!, ()=>{
@@ -148,7 +148,7 @@ export const updateProduct = TryCatch(async (req, res, next)=>{
 
     await product.save()
     
-    await invalidateCache({product:true})
+    await invalidateCache({product:true, productId: String(product._id)})
 
     return res.status(200).json({
         success: true,
@@ -161,14 +161,14 @@ export const deleteProduct = TryCatch(async(req, res, next)=>{
     const {id} = req.params
     
     const product = await Product.findById(id)
-    if(!product) return next(new ErrorHandler("Invalid Product Id", 400))
+    if(!product) return next(new ErrorHandler("Product not Found", 400))
 
     rm(product.photo!, ()=>{
         console.log("Photo Deleted")
     })
     await product.deleteOne()
     
-    await invalidateCache({product:true})
+    await invalidateCache({product:true, productId: id})
 
     return res.status(200).json({
         success: true,

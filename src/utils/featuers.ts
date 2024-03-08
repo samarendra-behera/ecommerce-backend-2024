@@ -12,22 +12,22 @@ export const connectDB = (url:string)=>{
     .catch((e)=>console.log(e))
 }
 
-export const invalidateCache = async ({product, order, admin}:invalidateCacheProps) =>{
+export const invalidateCache = async ({product, order, admin, userId,productId, orderId}:invalidateCacheProps) =>{
     if(product){
         const productKeys: string[] = [
             "admin-products",
             "categories",
             "latest-products"
         ]
-        const products = await Product.find({}).select("_id")
-        products.forEach( i => {
-            productKeys.push(`product-${i._id}`)
-        })
+        if ( typeof productId === 'string') productKeys.push(`product-${productId}`)
+        if (typeof productId === 'object') productId.forEach(i=> productKeys.push(`product-${i}`))
         myCache.del(productKeys)
     }
     if(order){
         const orderKeys: string[] = [
-            "all-orders"
+            "all-orders",
+            `my-orders-${userId}`,
+            `order-${orderId}`
         ]
         const users = await User.find({}).select("_id")
         users.forEach(i => {
