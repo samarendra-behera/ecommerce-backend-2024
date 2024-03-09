@@ -2,12 +2,16 @@ import express from 'express'
 import { 
     allCoupons,
     applyDiscount,
+    createPaymentIntent,
     deleteCoupon,
     newCoupon,
 } from '../controllers/payment.js'
 import { adminOnly } from '../middlewares/auth.js'
 
 const app = express.Router()
+
+// route - /api/v1/payment/create  -> Create Payment Indent
+app.post('/create', createPaymentIntent)
 
 // route - /api/v1/payment/discount  -> Apply coupon Code
 app.get('/discount', applyDiscount)
