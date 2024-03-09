@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Document } from "mongoose";
 import {invalidateCacheProps, orderItemType} from '../types/types.js'
 import { Product } from "../models/product.js";
 import { myCache } from "../app.js";
@@ -12,7 +12,7 @@ export const connectDB = (url:string)=>{
     .catch((e)=>console.log(e))
 }
 
-export const invalidateCache = async ({product, order, admin, userId,productId, orderId}:invalidateCacheProps) =>{
+export const invalidateCache = ({product, order, admin, userId,productId, orderId}:invalidateCacheProps) =>{
     if(product){
         const productKeys: string[] = [
             "admin-products",
@@ -29,20 +29,16 @@ export const invalidateCache = async ({product, order, admin, userId,productId, 
             `my-orders-${userId}`,
             `order-${orderId}`
         ]
-        const users = await User.find({}).select("_id")
-        users.forEach(i => {
-            orderKeys.push(`my-orders-${i._id}`)
-        });
-        
-        const orders = await Order.find({}).select("_id")
-        orders.forEach(i=>{
-            orderKeys.push(`order-${i._id}`)
-        })
         
         myCache.del(orderKeys)
     }
     if(admin){
-
+        myCache.del([
+            "admin-stats",
+            "admin-pie-charts",
+            "admin-bar-charts",
+            "admin-line-charts"
+        ])
     }
 }
 
@@ -57,8 +53,42 @@ export const reduceProductStock = async(orderItems: orderItemType[])=>{
 };
 
 export const calculatePercentage = (thisMonth:number, lastMonth:number) =>{
-    console.log(thisMonth)
     if(lastMonth === 0) return thisMonth * 100;
-    const per = ((thisMonth - lastMonth) / lastMonth) * 100;
+    const per = (thisMonth  / lastMonth) * 100;
     return Number(per.toFixed(0));
+}
+
+interface MyDocument extends Document {
+    createdAt: Date;
+    discount?: number;
+    total?: number;
+}
+
+type FunProps = {
+    length: number;
+    docArray: MyDocument[];
+    today: Date;
+    property?: "discount" | "total";
+};
+
+
+export const getChartData = ({
+    length,
+    docArray,
+    today,
+    property
+}:FunProps) =>{
+    const data:number[] = new Array(length).fill(0);
+
+    docArray.forEach((i)=>{
+        const creationDate = i.createdAt;
+        
+        const monthDiff = ((today.getMonth() - creationDate.getMonth()) + 12)  % 12;
+        const dataIndex = length - monthDiff -1;
+        if(length > dataIndex){
+            data[dataIndex] += property ? i[property]! : 1;
+        }
+    });
+    return data;
+
 }
