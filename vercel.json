@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "name": "ecommerce-backend",
+  "builds": [
+    { "src": "tsconfig.json", "use": "@now/node-typescript" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "/dist/app.js" }
+  ]
+}
