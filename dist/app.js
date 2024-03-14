@@ -38,3 +38,4 @@ app.use(errorMiddleware);
 app.listen(port, () => {
     console.log(`Express is working on http://${host}:${port}`);
 });
+export default app;
