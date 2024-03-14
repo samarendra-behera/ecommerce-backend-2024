@@ -13,3 +13,4 @@ app.get('/coupon/all', adminOnly, allCoupons);
 // route - /api/v1/payment/coupon/:id  -> Get All Coupons (Admin)
 app.delete('/coupon/:id', adminOnly, deleteCoupon);
 export default app;
+//# sourceMappingURL=payment.js.map

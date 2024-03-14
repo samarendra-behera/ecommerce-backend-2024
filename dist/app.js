@@ -39,3 +39,4 @@ app.listen(port, () => {
     console.log(`Express is working on http://${host}:${port}`);
 });
 export default app;
+//# sourceMappingURL=app.js.map

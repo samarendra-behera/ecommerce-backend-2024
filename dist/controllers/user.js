@@ -45,3 +45,4 @@ export const deleteUser = TryCatch(async (req, res, next) => {
         message: "User Deleted Successfully"
     });
 });
+//# sourceMappingURL=user.js.map

@@ -381,3 +381,4 @@ export const getLineCharts = TryCatch(async (req, res, next) => {
         charts
     });
 });
+//# sourceMappingURL=stats.js.map

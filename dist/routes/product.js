@@ -18,3 +18,4 @@ app.route('/:id').get(getProductDetails)
     .put(adminOnly, singleUpload, updateProduct)
     .delete(adminOnly, deleteProduct);
 export default app;
+//# sourceMappingURL=product.js.map

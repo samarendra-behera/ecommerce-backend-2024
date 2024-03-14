@@ -11,3 +11,4 @@ const stroage = multer.diskStorage({
     },
 });
 export const singleUpload = multer({ storage: stroage }).single("photo");
+//# sourceMappingURL=multer.js.map

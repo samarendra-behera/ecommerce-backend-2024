@@ -13,3 +13,4 @@ app.route("/:id").get(getOrderDetails)
     .put(adminOnly, updateOrderStatus) // To Update Order Status
     .delete(adminOnly, cancelOrder); // To Cancel Order
 export default app;
+//# sourceMappingURL=order.js.map
