@@ -1,10 +1,18 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "NodeNext",
-    "rootDir": "src",
-    "moduleResolution": "NodeNext",
-    "outDir": "dist",
-    "strict": true,
+      "module": "NodeNext",
+      "esModuleInterop": true,
+      "allowSyntheticDefaultImports": true,
+      "target": "ES2020",
+      "noImplicitAny": true,
+      "moduleResolution": "NodeNext",
+      "sourceMap": true,
+      "strict": true,
+      "outDir": "dist",
+      "baseUrl": ".",
+      "paths": {
+          "*": ["node_modules/*", "src/types/*"]
+      }
+  },
+  "include": ["./src/**/*"]
   }
-}
