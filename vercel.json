@@ -9,7 +9,7 @@
     ],
     "routes": [
       {"handle": "filesystem"},
-      { "src": "/uploads/(.*)", "dest": "/uploads/$1" },
+      { "src": "/uploads/(.*)", "dest": "/uploads/$1", "check": true },
       {
         "src": "/(.*)",
         "dest": "dist/app.js",
