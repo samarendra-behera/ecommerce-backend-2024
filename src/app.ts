@@ -1,5 +1,7 @@
 import express from "express";
 import NodeCache from "node-cache";
+import path from "path";
+import { fileURLToPath } from 'url';
 import {config} from "dotenv"
 import morgan from "morgan"
 import {connectDB} from "./utils/featuers.js"
@@ -16,6 +18,8 @@ import Stripe from "stripe";
 config({
     path: "./.env",
 })
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 45000
 const host = process.env.HOST || '127.0.0.1'
 const mongoUrl = process.env.MONGO_URL || ""
@@ -31,6 +35,7 @@ app.use(express.json())
 app.use(morgan("dev"))
 
 app.get('/', (req, res)=>{
+    console.log(typeof(__dirname))
     res.send("API Working with /api/v1")
 })
 
@@ -45,7 +50,7 @@ app.use("/uploads", express.static("uploads"));
 app.use(errorMiddleware)
 
 app.listen(port,()=>{
-    console.log(`Express is working on http://${host}:${port}`)
+    console.log(`Express is working on port ${port}`)
 })
 
 export default app;
