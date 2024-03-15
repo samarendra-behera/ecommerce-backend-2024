@@ -9,17 +9,13 @@
           "dist/**"
         ]
       }
-    },
-    {
-      "src": "./uploads/*",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/uploads/(.*)",
-      "dest": "/uploads/$1",
-      "check": true
+      "src": "/api/upload",
+      "methods": ["POST"],
+      "dest": "dist/app.js"
     },
     {
       "src": "/(.*)",
@@ -40,5 +36,23 @@
       }
     }
   ],
-  "outputDirectory": "uploads"
+  "rewrites": [
+    {
+      "source": "/uploads/(.*)",
+      "destination": "/uploads/$1"
+    }
+  ],
+  "serverless": {
+    "functions": {
+      "payload": {
+        "maxSize": "10mb" 
+      }
+    }
+  },
+  "outputDirectory": "uploads",
+  "functions": {
+    "api/**/*.js": {
+      "binary": true
+    }
+  }
 }
