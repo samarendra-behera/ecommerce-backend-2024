@@ -1,5 +1,6 @@
 import express from "express";
 import path from "path";
+import { fileURLToPath } from 'url';
 import NodeCache from "node-cache";
 import { config } from "dotenv";
 import morgan from "morgan";
@@ -15,6 +16,8 @@ import Stripe from "stripe";
 config({
     path: "./.env",
 });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 45000;
 const host = process.env.HOST || '127.0.0.1';
 const mongoUrl = process.env.MONGO_URL || "";
