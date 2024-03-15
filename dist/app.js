@@ -17,7 +17,8 @@ config({
     path: "./.env",
 });
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+let __dirname = path.dirname(__filename);
+__dirname = path.join(__dirname, "../", "uploads");
 const port = process.env.PORT || 45000;
 const host = process.env.HOST || '127.0.0.1';
 const mongoUrl = process.env.MONGO_URL || "";
@@ -29,7 +30,6 @@ const app = express();
 app.use(express.json());
 app.use(morgan("dev"));
 app.get('/', (req, res) => {
-    console.log(typeof (__dirname));
     res.send("API Working with /api/v1");
 });
 // Using Routes
@@ -38,7 +38,7 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(__dirname));
 app.use(errorMiddleware);
 app.listen(port, () => {
     console.log(`Express is working on port ${port}`);
