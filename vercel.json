@@ -42,16 +42,10 @@
       "destination": "/uploads/$1"
     }
   ],
-  "serverless": {
-    "functions": {
-      "payload": {
-        "maxSize": "10mb" 
-      }
-    }
-  },
   "outputDirectory": "uploads",
   "functions": {
-    "api/**/*.js": {
+    "dist/**/*.js": {
+      "runtime": "@vercel/node",
       "binary": true
     }
   }
