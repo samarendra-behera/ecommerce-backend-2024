@@ -11,4 +11,3 @@ app.get('/bar', adminOnly, getBarCharts);
 // routes - /api/v1/dashboard/line
 app.get('/line', adminOnly, getLineCharts);
 export default app;
-//# sourceMappingURL=stats.js.map

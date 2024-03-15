@@ -111,4 +111,3 @@ export const cancelOrder = TryCatch(async (req, res, next) => {
         message: "Order Deleted Successfully"
     });
 });
-//# sourceMappingURL=order.js.map

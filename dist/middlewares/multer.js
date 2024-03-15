@@ -1,8 +1,9 @@
 import multer from "multer";
+import path from "path";
 import { v4 as uuid } from 'uuid';
 const stroage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "uploads");
+        cb(null, path.join(__dirname, "uploads"));
     },
     filename: function (req, file, cb) {
         const id = uuid();
@@ -11,4 +12,3 @@ const stroage = multer.diskStorage({
     },
 });
 export const singleUpload = multer({ storage: stroage }).single("photo");
-//# sourceMappingURL=multer.js.map

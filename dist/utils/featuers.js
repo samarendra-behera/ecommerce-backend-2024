@@ -65,4 +65,3 @@ export const getChartData = ({ length, docArray, today, property }) => {
     });
     return data;
 };
-//# sourceMappingURL=featuers.js.map

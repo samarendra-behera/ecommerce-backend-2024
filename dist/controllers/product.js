@@ -167,4 +167,3 @@ export const deleteProduct = TryCatch(async (req, res, next) => {
         message: "Product Deleted Successfully"
     });
 });
-//# sourceMappingURL=product.js.map

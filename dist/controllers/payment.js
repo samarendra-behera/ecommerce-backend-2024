@@ -52,4 +52,3 @@ export const deleteCoupon = TryCatch(async (req, res, next) => {
         message: `Coupon ${coupon?.code} Deleted Successfully`
     });
 });
-//# sourceMappingURL=payment.js.map

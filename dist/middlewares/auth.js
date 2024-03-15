@@ -12,4 +12,3 @@ export const adminOnly = TryCatch(async (req, res, next) => {
         return next(new ErrorHandler("Authorization Denied, Admin Permission Required", 401));
     next();
 });
-//# sourceMappingURL=auth.js.map

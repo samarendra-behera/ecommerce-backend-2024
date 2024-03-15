@@ -9,4 +9,3 @@ app.get('/all', adminOnly, getAllUsers);
 // Routes - /api/v1/user/dynamicId
 app.route('/:id').get(getUser).delete(adminOnly, deleteUser);
 export default app;
-//# sourceMappingURL=user.js.map

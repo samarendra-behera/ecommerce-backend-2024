@@ -1,1 +1,0 @@
-{"version":3,"file":"utility-class.js","sourceRoot":"","sources":["../../src/utils/utility-class.ts"],"names":[],"mappings":"AAAA,MAAM,YAAa,SAAQ,KAAK;IAC5B,YAAmB,OAAc,EAAS,UAAiB;QACvD,KAAK,CAAC,OAAO,CAAC,CAAC;QADA,YAAO,GAAP,OAAO,CAAO;QAAS,eAAU,GAAV,UAAU,CAAO;QAEvD,IAAI,CAAC,UAAU,GAAG,UAAU,CAAC;IACjC,CAAC;CACJ;AAED,eAAe,YAAY,CAAA"}

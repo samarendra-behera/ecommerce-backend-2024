@@ -1,4 +1,5 @@
 import express from "express";
+import path from "path";
 import NodeCache from "node-cache";
 import { config } from "dotenv";
 import morgan from "morgan";
@@ -33,10 +34,9 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
-app.use("/uploads", express.static("uploads"));
+express.static(path.join(__dirname, 'uploads'));
 app.use(errorMiddleware);
 app.listen(port, () => {
     console.log(`Express is working on http://${host}:${port}`);
 });
 export default app;
-//# sourceMappingURL=app.js.map

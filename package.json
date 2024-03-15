@@ -2,22 +2,14 @@
   "name": "ecommerce-backend",
   "version": "1.0.0",
   "description": "my first backend in nodejs and typescript",
-  "main": "app.js",
+  "main": "index.js",
   "type": "module",
   "scripts": {
     "start": "node ./dist/app.js",
-    "build": "rimraf dist && tsc",
-    "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
     "watch": "tsc -w",
     "dev": "nodemon ./dist/app.js"
   },
-  "pre-commit": [
-    "ts.check",
-    "build",
-    "add-build"
-  ],
   "author": "SamarendraBehera",
   "license": "ISC",
   "dependencies": {
@@ -40,8 +32,6 @@
     "@types/uuid": "^9.0.8",
     "@types/validator": "^13.11.9",
     "nodemon": "^3.0.3",
-    "pre-commit": "^1.2.2",
-    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   }
 }
