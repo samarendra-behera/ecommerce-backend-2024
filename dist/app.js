@@ -18,9 +18,8 @@ config({
 });
 const __filename = fileURLToPath(import.meta.url);
 let __dirname = path.dirname(__filename);
-__dirname = path.join(__dirname, "../", "uploads");
+export const upload_path = path.join(__dirname, "../", "uploads");
 const port = process.env.PORT || 45000;
-const host = process.env.HOST || '127.0.0.1';
 const mongoUrl = process.env.MONGO_URL || "";
 const stripeKey = process.env.STRIPE_KEY || "";
 connectDB(mongoUrl);
@@ -38,7 +37,7 @@ app.use("/api/v1/product", productRoutes);
 app.use("/api/v1/order", orderRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
-app.use("/uploads", express.static(__dirname));
+app.use("/uploads", express.static(upload_path));
 app.use(errorMiddleware);
 app.listen(port, () => {
     console.log(`Express is working on port ${port}`);
