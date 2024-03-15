@@ -8,7 +8,7 @@
       }
     ],
     "routes": [
-      { "src": "/uploads/(.*)", "dest": "/uploads/$1", "handle": "filesystem", "check": true},
+      { "src": "/uploads/(.*)", "dest": "/uploads/$1",  "check": true},
       {
         "src": "/(.*)",
         "dest": "dist/app.js",
