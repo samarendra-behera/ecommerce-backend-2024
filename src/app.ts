@@ -1,6 +1,6 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from 'url';
+// import path from "path";
+// import { fileURLToPath } from 'url';
 import NodeCache from "node-cache";
 import {config} from "dotenv"
 import morgan from "morgan"
@@ -18,8 +18,8 @@ import Stripe from "stripe";
 config({
     path: "./.env",
 })
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+// const __filename = fileURLToPath(import.meta.url);
+// export const __dirname = path.dirname(__filename);
 const port = process.env.PORT || 45000
 const host = process.env.HOST || '127.0.0.1'
 const mongoUrl = process.env.MONGO_URL || ""
@@ -45,7 +45,7 @@ app.use("/api/v1/order", orderRoutes)
 app.use("/api/v1/payment", paymentRoutes)
 app.use("/api/v1/dashboard", dashboardRoutes )
 
-express.static(path.join(__dirname, 'uploads'))
+app.use("/uploads", express.static("uploads"));
 app.use(errorMiddleware)
 
 app.listen(port,()=>{
