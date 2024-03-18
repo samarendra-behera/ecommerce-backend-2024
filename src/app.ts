@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import NodeCache from "node-cache";
 import path from "path";
 import { fileURLToPath } from 'url';
@@ -34,6 +35,7 @@ const app = express()
 
 app.use(express.json())
 app.use(morgan("dev"))
+app.use(cors())
 
 app.get('/', (req, res)=>{
     res.send("API Working with /api/v1")
