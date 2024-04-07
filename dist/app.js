@@ -2,9 +2,11 @@ import express from "express";
 import cors from "cors";
 import NodeCache from "node-cache";
 import path from "path";
+import swaggerUi from "swagger-ui-express";
 import { fileURLToPath } from 'url';
 import { config } from "dotenv";
 import morgan from "morgan";
+import swaggerDocument from './swagger.json' assert { type: "json" };
 import { connectDB } from "./utils/featuers.js";
 import { errorMiddleware } from "./middlewares/error.js";
 // Importing Routes
@@ -41,6 +43,7 @@ app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/uploads", express.static(upload_path));
 app.use(errorMiddleware);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.listen(port, () => {
     console.log(`Express is working on port ${port}`);
 });

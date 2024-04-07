@@ -5,6 +5,7 @@
     "rootDir": "src",
     "moduleResolution": "NodeNext",
     "outDir": "dist",
+    "resolveJsonModule": true,
     "strict": true,
   }
 }

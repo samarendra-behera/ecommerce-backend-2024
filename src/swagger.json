@@ -1,0 +1,799 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "E-Commerce2024",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:4500"
+        },
+        {
+            "url": "https://ecommerce-backend-2024-five.vercel.app"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Users"
+        },
+        {
+            "name": "Products"
+        },
+        {
+            "name": "Orders"
+        },
+        {
+            "name": "Payments"
+        },
+        {
+            "name": "Admin-Stats"
+        }
+    ],
+    "paths": {
+        "/api/v1/user/new/": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create New User",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "_id": "customer65",
+                                    "name": "Sama",
+                                    "gender": "male",
+                                    "photo": "photo",
+                                    "email": "sdddama@gmail.com",
+                                    "dob": "2002-10-12"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/all": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "All Users",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"query",
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Get User Details",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Delete User",
+                "parameters":[
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "schema":{
+                            "type":"string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/new": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Add Product",
+                "description": "\n### Add New Product\n\nThis endpoint allows you to add a new product to the database.\n\n#### Request Body\n- `name` (text): The name of the product.\n- `price` (text): The price of the product.\n- `category` (text): The category of the product.\n- `stock` (text): The stock quantity of the product.\n- `photo` (file): The photo of the product.\n\n#### Response\nUpon successful creation, the response will have a status code of 201 and a JSON body with the following structure:\n```json\n{\n    \"success\": true,\n    \"message\": \"\",\n    \"product\": {\n        \"name\": \"\",\n        \"photo\": \"\",\n        \"price\": 0,\n        \"stock\": 0,\n        \"category\": \"\",\n        \"_id\": \"\",\n        \"createdAt\": \"\",\n        \"updatedAt\": \"\",\n        \"__v\": 0\n    }\n}\n```\n",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sony Camera"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "450000"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "camera"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": "34"
+                                    },
+                                    "photo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/latest": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get Latest Products",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/all": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Search All Products",
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "sony"
+                    },
+                    {
+                        "name": "price",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "50000"
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "camera"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "example": "1"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/admin-products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get All Admin All Products",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/{id}": {
+            "put": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Update Product",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "photo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "SoNy Camera"
+                                    },
+                                    "category": {
+                                        "type": "string",
+                                        "example": "camera"
+                                    },
+                                    "stock": {
+                                        "type": "integer",
+                                        "example": "22"
+                                    },
+                                    "price": {
+                                        "type": "integer",
+                                        "example": "20000"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Delete Product",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get Single Product Details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/product/categories": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get Categories",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/new": {
+            "post": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Place New Order",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "shippingInfo": {
+                                        "address": "BBSR",
+                                        "city": "Bhubaneswar",
+                                        "state": "Odisha",
+                                        "pinCode": 759022,
+                                        "country": "India"
+                                    },
+                                    "user": "customer45",
+                                    "subTotal": 200,
+                                    "tax": 20,
+                                    "shippingCharges": 30,
+                                    "discount": 0,
+                                    "total": 240,
+                                    "status": "Processing",
+                                    "orderItems": [
+                                        {
+                                            "productId": "65eaab9e9743ce0f41e89cae",
+                                            "name": "Sony Camera",
+                                            "photo": "uploads\\902cd4f1-da64-4250-affc-71e317b51cbf.jpeg",
+                                            "price": 45000,
+                                            "quantity": 4
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/my": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get My Orders",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/{id}": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get Order Details",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Update Order Status ( For Admin )",
+                "requestBody": {
+                    "content": {}
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Delete Order ( For Admin )",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/order/all": {
+            "get": {
+                "tags": [
+                    "Orders"
+                ],
+                "summary": "Get All Placed Orders (For Admin)",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment/coupon/new": {
+            "post": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Create New Coupon Copy",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "example": {
+                                    "code": "HappyHoli",
+                                    "amount": 3000
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment/coupon/all": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Get All Coupons (Admin)",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "customer45"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment/coupon/{id}": {
+            "delete": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Delete Coupon (Admin)",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/payment/discount": {
+            "get": {
+                "tags": [
+                    "Payments"
+                ],
+                "summary": "Apply Discount",
+                "parameters": [
+                    {
+                        "name": "coupon",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/dashboard/stats": {
+            "get": {
+                "tags": [
+                    "Admin-Stats"
+                ],
+                "summary": "Get Dashboard Stats",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/dashboard/pie": {
+            "get": {
+                "tags": [
+                    "Admin-Stats"
+                ],
+                "summary": "Get Pie Charts",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/dashboard/bar": {
+            "get": {
+                "tags": [
+                    "Admin-Stats"
+                ],
+                "summary": "Get Bar Charts",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/dashboard/line": {
+            "get": {
+                "tags": [
+                    "Admin-Stats"
+                ],
+                "summary": "Get Line Charts",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
