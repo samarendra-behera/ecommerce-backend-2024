@@ -50,13 +50,12 @@ export const getOrderDetails = TryCatch(async (req, res, next) => {
     });
 });
 export const newOrder = TryCatch(async (req, res, next) => {
-    const { shippingInfo, user, subTotal, tax, shippingCharges, discount, total, status, orderItems } = req.body;
+    const { shippingInfo, user, subTotal, tax, shippingCharges, discount, total, orderItems } = req.body;
     if (!shippingInfo ||
         !user ||
         !subTotal ||
         !tax ||
         !total ||
-        !status ||
         !orderItems)
         return next(new ErrorHandler("Please Enter All Fields", 400));
     await Order.create({
@@ -67,7 +66,6 @@ export const newOrder = TryCatch(async (req, res, next) => {
         shippingCharges,
         discount,
         total,
-        status,
         orderItems
     });
     await reduceProductStock(orderItems);

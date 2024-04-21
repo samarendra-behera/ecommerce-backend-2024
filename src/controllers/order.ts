@@ -10,7 +10,7 @@ export const myOrders = TryCatch(async (req, res, next) => {
     const { id: user } = req.query
     let orders = [];
     const key = `my-orders-${user}`;
-    
+
 
     if (myCache.has(key)) orders = JSON.parse(myCache.get(key) as string)
     else {
@@ -69,7 +69,6 @@ export const newOrder = TryCatch(async (req: Request<{}, {}, newOrderReqBody>, r
         shippingCharges,
         discount,
         total,
-        status,
         orderItems
     } = req.body
     if (!shippingInfo ||
@@ -77,7 +76,6 @@ export const newOrder = TryCatch(async (req: Request<{}, {}, newOrderReqBody>, r
         !subTotal ||
         !tax ||
         !total ||
-        !status ||
         !orderItems
     ) return next(new ErrorHandler("Please Enter All Fields", 400))
     await Order.create({
@@ -88,12 +86,11 @@ export const newOrder = TryCatch(async (req: Request<{}, {}, newOrderReqBody>, r
         shippingCharges,
         discount,
         total,
-        status,
         orderItems
     })
     await reduceProductStock(orderItems);
 
-    invalidateCache({ product: true, order:true, admin: true, userId: user, productId:orderItems.map(i=>i.productId) });
+    invalidateCache({ product: true, order: true, admin: true, userId: user, productId: orderItems.map(i => i.productId) });
     res.status(200).json({
         success: true,
         message: "Order Placed Successfully"
