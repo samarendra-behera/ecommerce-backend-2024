@@ -1,32 +1,26 @@
-# Installing TypeScript Globally
 
-This guide will walk you through the steps to install TypeScript globally on your system using npm.
+# E-COMMERCE BACKEND 2024
 
-## Prerequisites
+# Install Dependencies
 
-Before you begin, ensure that you have the following installed on your system:
-
-- [Node.js](https://nodejs.org/) (including npm)
-
-## Installation
-
-To install TypeScript globally, follow these steps:
-
-1. **Open a terminal or command prompt.**
-   
-2. **Run the following npm command to install TypeScript globally:**
-   
-   ```bash
-   npm install -g typescript@5.3.3
+**For Backend** - `npm i && npm run build`
 
 
-## Installation
+## Env Variables
 
-To install all npm packages listed in the `package.json` file, follow these steps:
+Make Sure to Create a  .env file in root directory and add appropriate variables in order to use the app.
 
-1. **Open a terminal or command prompt.**
+**Essential Variables**
+PORT= `4000 or any`
+MONGO_URI= `mongodb://localhost:27017 or cloud uri`
+STRIPE_KEY=`stripe secret key`
+PRODUCT_PER_PAGE=`8 or any`
 
-2. **Navigate to your project directory.**
+_fill each filed with your info respectively_
 
-   ```bash
-   npm i
+## Author
+
+**Instagram** Click [Here](https://www.instagram.com/meabhisingh) **@meAbhiSingh**
+**YouTube** Click [Here](https://www.youtube.com/channel/UCO7afj9AUo0zV69pqEYhcjw/) **6 Pack Programmer**
+**LinkedIn** Click [Here](https://in.linkedin.com/in/meabhisingh) **@meAbhiSingh**
+**Twitter** Click [Here](https://twitter.com/meAbhi_Singh) **@meAbhi_Singh**
