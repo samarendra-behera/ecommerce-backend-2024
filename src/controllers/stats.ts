@@ -88,8 +88,8 @@ export const getDashboardStats = TryCatch(async (req, res, next) => {
                 $project: {
                     status: 1,
                     discount: 1,
-                    total: 1,
-                    orderItemsCount: { $size: "$orderItems" }
+                    amount: "$total",
+                    quantity: { $size: "$orderItems" }
                 }
             }
         ])
