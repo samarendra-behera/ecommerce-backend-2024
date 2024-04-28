@@ -1,5 +1,5 @@
 /node_modules/
 
-/dict
+/dist
 
 .env
